@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "App.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\nimport { fly } from 'svelte/transition';\nlet visible = false \nlet data\nlet curr_infect\nlet curr_recovered \nlet tot_cases\nfetch(\"https://corona-virus-stats.herokuapp.com/api/v1/cases/general-stats\")\n            .then(response => response.json()) \n            .then(responseData => {\n\t\t\t\tconsole.log(responseData.data)\n\t\t\t\tdata = responseData.data\n\t\t\t\tconsole.log(data)\n\t\t\t\tcurr_infect = responseData.data.currently_infected\n\t\t\t\tcurr_recovered = responseData.data.recovery_cases\n\t\t\t\ttot_cases = responseData.data.total_cases\n\t\t\t\tvisible = true\n\t\t\t});\n</script>\n\n<style>\n\t*{\n\t\ttext-align: center;\n\t}\n\th1{\n\t\tfont-size: 4em;\n\t}\n\th3{\n\t\tfont-size: 3em;\n\t}\n\n\t.red{\n\t\tcolor:red;\n\t}\n\t.green{\n\t\tcolor:green;\n\t}\n\t.orange{\n\t\tcolor:orange;\n\t}\n</style>\n\n<div>\n\t{#if visible}\n\t<div transition:fly=\"{{ y: -500, duration: 2000 }}\">\n\t\t<h1>COVID at a glance</h1>\n\t\t<h1 class=\"red\">Currently Infected</h1>\n\t\t<h3>{curr_infect}</h3>\n\t\t<h1 class=\"green\">Recovered Cases</h1>\n\t\t<h3>{curr_recovered}</h3>\n\t\t<h1 class=\"orange\">Total Cases Ever</h1>\n\t\t<h3>{tot_cases}</h3>\n\t</div>\n\t{/if}\n</div>"
+  ],
+  "names": [],
+  "mappings": "AAqBC,eAAC,CAAC,AACD,UAAU,CAAE,MAAM,AACnB,CAAC,AACD,iBAAE,CAAC,AACF,SAAS,CAAE,GAAG,AACf,CAAC,AACD,iBAAE,CAAC,AACF,SAAS,CAAE,GAAG,AACf,CAAC,AAED,mBAAI,CAAC,AACJ,MAAM,GAAG,AACV,CAAC,AACD,qBAAM,CAAC,AACN,MAAM,KAAK,AACZ,CAAC,AACD,sBAAO,CAAC,AACP,MAAM,MAAM,AACb,CAAC"
+}
